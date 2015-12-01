@@ -1,14 +1,14 @@
-# Vault Rails Changelog
+# Vault ActiveRecord Changelog
 
 ## v0.1.2.dev (Unreleased)
 
 BREAKING CHANGES
-- The API for configuration now lives under `Vault::Rails` instead of `Vault`.
+- The API for configuration now lives under `Vault::ActiveRecord` instead of `Vault`.
   Existing users will need to update their configuration as follows:
 
   ```diff
   - Vault.configure do |config|
-  + Vault::Rails.configure do |config|
+  + Vault::ActiveRecord.configure do |config|
   ```
 - Remove testing mode and use an in-memory vault store in development and test
   instead with the option to disable

@@ -1,5 +1,5 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-require "vault/rails"
+require "vault/active_record"
 
 require "rspec"
 

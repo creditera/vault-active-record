@@ -38,7 +38,7 @@ module Vault
       def vault_attribute(attribute, options = {})
         encrypted_column = options[:encrypted_column] || "#{attribute}_encrypted"
         path = options[:path] || "transit"
-        key = options[:key] || "#{Vault::Rails.application}_#{table_name}_#{attribute}"
+        key = options[:key] || "#{Vault::ActiveRecord.application}_#{table_name}_#{attribute}"
 
         # Sanity check options!
         _vault_validate_options!(options)
@@ -49,7 +49,7 @@ module Vault
         # Unless a class or module was given, construct our serializer. (Slass
         # is a subset of Module).
         if serializer && !serializer.is_a?(Module)
-          serializer = Vault::Rails.serializer_for(serializer)
+          serializer = Vault::ActiveRecord.serializer_for(serializer)
         end
 
         # See if custom encoding or decoding options were given.
@@ -124,18 +124,18 @@ module Vault
       def _vault_validate_options!(options)
         if options[:serializer]
           if options[:encode] || options[:decode]
-            raise Vault::Rails::ValidationFailedError, "Cannot use a " \
+            raise Vault::ActiveRecord::ValidationFailedError, "Cannot use a " \
               "custom encoder/decoder if a `:serializer' is specified!"
           end
         end
 
         if options[:encode] && !options[:decode]
-          raise Vault::Rails::ValidationFailedError, "Cannot specify " \
+          raise Vault::ActiveRecord::ValidationFailedError, "Cannot specify " \
             "`:encode' without specifying `:decode' as well!"
         end
 
         if options[:decode] && !options[:encode]
-          raise Vault::Rails::ValidationFailedError, "Cannot specify " \
+          raise Vault::ActiveRecord::ValidationFailedError, "Cannot specify " \
             "`:decode' without specifying `:encode' as well!"
         end
       end
@@ -181,7 +181,7 @@ module Vault
         end
 
         # Load the plaintext value
-        plaintext = Vault::Rails.decrypt(path, key, ciphertext)
+        plaintext = Vault::ActiveRecord.decrypt(path, key, ciphertext)
 
         # Deserialize the plaintext value, if a serializer exists
         if serializer
@@ -237,7 +237,7 @@ module Vault
         end
 
         # Generate the ciphertext and store it back as an attribute
-        ciphertext = Vault::Rails.encrypt(path, key, plaintext)
+        ciphertext = Vault::ActiveRecord.encrypt(path, key, plaintext)
 
         # Write the attribute back, so that we don't have to reload the record
         # to get the ciphertext

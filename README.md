@@ -10,7 +10,7 @@ Quick Start
 1. Add to your Gemfile:
 
     ```ruby
-    gem "vault-rails", "~> 0.1", require: false
+    gem "vault-active-record", "~> 0.1", require: false
     ```
 
     and then run the `bundle` command to install.
@@ -20,7 +20,7 @@ Quick Start
     ```ruby
     require "vault/rails"
 
-    Vault::Rails.configure do |vault|
+    Vault::ActiveRecord.configure do |vault|
       # Use Vault in transit mode for encrypting and decrypting data. If
       # disabled, vault-rails will encrypt data in-memory using a similar
       # algorithm to Vault. The in-memory store uses a predictable encryption

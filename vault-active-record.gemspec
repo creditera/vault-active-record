@@ -1,12 +1,12 @@
 $:.push File.expand_path("../lib", __FILE__)
 
 # Maintain your gem's version:
-require "vault/rails/version"
+require "vault/active_record/version"
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = "vault-active-record"
-  s.version     = Vault::Rails::VERSION
+  s.version     = Vault::ActiveRecord::VERSION
   s.authors     = ["JohnnyT", "Zach Abrahams", "Mitch Monsen"]
   s.email       = ["johnnyt@nav.com", "zabrahams@nav.com", "mitch@nav.com"]
   s.homepage    = "https://github.com/creditera/vault-active-record"

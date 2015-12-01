@@ -11,13 +11,13 @@ describe Vault::EncryptedModel do
     it "raises an exception if a serializer and :encode is given" do
       expect {
         klass.vault_attribute(:foo, serializer: :json, encode: ->(r) { r })
-      }.to raise_error(Vault::Rails::ValidationFailedError)
+      }.to raise_error(Vault::ActiveRecord::ValidationFailedError)
     end
 
     it "raises an exception if a serializer and :decode is given" do
       expect {
         klass.vault_attribute(:foo, serializer: :json, decode: ->(r) { r })
-      }.to raise_error(Vault::Rails::ValidationFailedError)
+      }.to raise_error(Vault::ActiveRecord::ValidationFailedError)
     end
 
     it "defines a getter" do
